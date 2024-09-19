@@ -126,6 +126,7 @@
             "img/Brown and Green Fish.png",              // Fish 3
             "img/Orange-ish Fish.png",                   // Fish 4
             "img/Plant.png",
+            "img/bubbles.png"
         ];
 
         await Promise.all(assetUrls.map(url => PIXI.Assets.load(url)));
@@ -133,11 +134,11 @@
         // Add our first fish sprite
         let fish1 = PIXI.Sprite.from(assetUrls[0]);
         fish1.scale.set(0.2);
-        fish1.scale.x = -0.2;
-        fish1.anchor.set(0.2, 0.9);
+        fish1.scale.x = -0.5;
+        fish1.anchor.set(0.2, 0.5);
         //fish1.tint = 0xFF0000; // Red
-        fish1.x = 350;
-        fish1.y = 400;
+        fish1.x = 450;
+        fish1.y = 150;
 
         // Add our second fish sprite
         let fish2 = PIXI.Sprite.from(assetUrls[1]); // Second fish 
@@ -207,7 +208,7 @@
             bubble.scale.set(0.1);
             bubble.anchor.set(0.5);
             bubble.x = Math.random() * app.renderer.width;
-            bubble.y = app.renderer.height - Math.random() * 100;
+            bubble.y = app.renderer.height - Math.random() * 220;
             app.stage.addChild(bubble);
             bubbles.push(bubble);
         }
