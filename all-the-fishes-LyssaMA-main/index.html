@@ -129,7 +129,6 @@
         fish1.scale.set(0.2);
         fish1.scale.x = -0.5;
         fish1.anchor.set(0.2, 0.5);
-        //fish1.tint = 0xFF0000; // Red
         fish1.x = 450;
         fish1.y = 150;
 
@@ -144,14 +143,14 @@
         let fish3 = PIXI.Sprite.from(assetUrls[2]); // Third fish 
         fish3.scale.set(0.2);
         fish3.anchor.set(0.25);
-        fish3.x = 550;
-        fish3.y =150;
+        fish3.x = 575;
+        fish3.y = 200;
 
         // Add our fourth fish sprite
         let fish4 = PIXI.Sprite.from(assetUrls[3]); // Fourth fish 
         fish4.scale.set(0.2);
         fish4.anchor.set(0.4);
-        fish4.x = 550;
+        fish4.x = 400;
         fish4.y = 350;
 
         // Fish container 
@@ -159,7 +158,7 @@
         fishContainer.addChild(fish1);
         fishContainer.addChild(fish2);
         fishContainer.addChild(fish3);
-        fishContainer.addChild(fish4); 
+        fishContainer.addChild(fish4);
         app.stage.addChild(fishContainer);
 
         // Plants
@@ -173,7 +172,7 @@
         plant2.x = 65;
         plant2.y = 400;
 
-        let plant3 = PIXI.Sprite.from(assetUrls[4]);
+        let plant3 = PIXI.Sprite.from(assetUrls[4]); //5th
         plant3.scale.set(0.20);
         plant3.x = 450;
         plant3.y = 400;
@@ -213,22 +212,22 @@
         function loop() {
             counter++;
 
-            // Fish 1 Animation (swim)
-            fish1.y = (Math.sin(counter/50) * 50) + 280;
-            fish1.scale.x = (Math.sin(counter/4) * .005) + -.25;
+            // Fish 1 Animation (swim) 
+            fish1.y = (Math.sin(counter / 70) * 50) + 330;
+            fish1.scale.x = (Math.sin(counter / 4) * .005) + -.25;
 
-            // Fish 2 Animation (change color)
-            fish2.tint = PIXI.utils.rgb2hex([
-                Math.abs(Math.sin(counter / 100)), // Red 
-                Math.abs(Math.sin(counter / 100 + Math.PI / 3)), // Green 
-                Math.abs(Math.sin(counter / 100 + 2 * Math.PI / 3)) // Blue 
-            ]);
+            // Fish 2 Animation (tint and swim)
+            fish2.tint = 0xFFFFFF * (Math.abs(Math.sin(counter / 50)));
+
+            // Fish 2 Swim (left and right)
+            fish2.x = 150 + Math.sin(counter / 30) * 10;
+
 
             // Fish 3 Animation (up and down)
-            fish3.y = 250 + Math.sin(counter / 40) * 20;
+            fish3.y = 220 + Math.sin(counter / 25) * 25;
 
             // Fish 4 Animation (up and down)
-            fish4.y = 150 + Math.sin(counter / 20) * 10;
+            fish4.y = 100 + Math.sin(counter / 20) * 10;
 
             // Bubble Animation
             bubbles.forEach(bubble => {
