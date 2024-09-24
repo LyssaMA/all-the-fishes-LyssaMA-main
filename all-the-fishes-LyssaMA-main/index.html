@@ -242,6 +242,76 @@
         }
         loop();
 
+        // Make a Button Class
+        class Button extends PIXI.Container {
+
+            //Constructor
+            constructor(text, w = 80, h = 50) {
+                super();
+
+                if (text === undefined) text = "Button";
+                if (w === undefined) w = 80;
+                if (h === undefined) h = 50;
+
+                //Button body
+                let body = new PIXI.Graphics();
+                body.beginFill(0x3EB489);
+                body.drawRect(0, 0, w, h);
+                body.endFill();
+                this.addChild(body);
+                this.body = body;
+
+                //Button label
+                let label = new PIXI.Text(text, { fontSize: 18 });
+                label.anchor.set(0.5);
+                label.x = body.width / 2;
+                label.y = body.height / 2;
+                this.addChild(label);
+
+                //Make it interactive
+                this.interactive = true;
+            }
+        }
+
+        // Button to randomly change Fish 3's color
+        let colorChangeButton = new Button("Change Fish 3 Color", 180, 50);
+        colorChangeButton.x = 580;
+        colorChangeButton.y = 40;
+
+        // Change Fish 3's color on click
+        colorChangeButton.on('pointerdown', () => {
+            fish3.tint = Math.random() * 0xFFFFFF;
+        });
+
+        app.stage.addChild(colorChangeButton);
+
+        // Make Fish 1 draggable
+        fish1.interactive = true;
+        fish1.buttonMode = true;
+
+        fish1.on('pointerdown', onDragStart)
+            .on('pointerup', onDragEnd)
+            .on('pointerupoutside', onDragEnd)
+            .on('pointermove', onDragMove);
+
+        function onDragStart(event) {
+            this.data = event.data;
+            this.dragging = true;
+        }
+
+        function onDragEnd() {
+            this.dragging = false;
+            this.data = null;
+        }
+
+        function onDragMove() {
+            if (this.dragging) {
+                const newPosition = this.data.getLocalPosition(this.parent);
+                this.x = newPosition.x;
+                this.y = newPosition.y;
+            }
+        }
+
     </script>
 </body>
 
